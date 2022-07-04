@@ -2,22 +2,34 @@ import React,{useState} from 'react'
 
 export default function Textform(props) {
     const handleUpClick=()=>{
-        //console.log("btn clicked") ;
         let newText = text.toUpperCase() ;
         setText(newText) ;
     }
+    const handlelowerClick=()=>{
+        let newText = text.toLowerCase() ;
+        setText(newText) ;
+    }
     const handleOnChange=(event)=>{
-        //console.log("on change");
         setText(event.target.value) ;
     }
-    const[text,setText] = useState('Enter your text here :-') ;
+    const[text,setText] = useState('') ;
     return (
-        <div>
+        <>
+        <div className='container'>
             <h1>{props.heading}</h1>
             <div className="mb-3">
-            <textarea className="form-control" id="my-box"  value={text} onChange={handleOnChange} rows="8"></textarea>
+            <textarea className="form-control" id="my-box"  value={text} onChange={handleOnChange} rows="6"></textarea>
             </div>
-            <button className="btn btn-primary" onClick={handleUpClick}>Convert to uppercase</button>
+            <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to uppercase</button>
+            <button className="btn btn-primary mx-1" onClick={handlelowerClick}>Convert to lowercase</button>
         </div>
-  )
+        <div className="container my-3">
+            <h2>Your Text Summary</h2>
+            <p>{text.split(" ").length} words and { text.length } characters</p>
+            <p>{0.008 * text.split(" ").length} Minutes to Read</p>
+            <h2>Preview</h2>
+            <p>{text}</p>
+        </div>
+        </>
+   )
 }
